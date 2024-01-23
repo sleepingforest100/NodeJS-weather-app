@@ -13,8 +13,17 @@
           <input name="city" type="text" class="ghost-input" placeholder="Enter a City here" required>
           <input type="submit" class="ghost-button" value="Get Weather">
         </form>
-        <% if(weather !== null){ %>
-          <p><%= weather %></p>
+        <% if(weatherData !== null){ %>
+          <p>Temperature: <%= weatherData.temperature %> °C</p>
+          <p>Description: <%= weatherData.description %></p>
+          <p>Icon: <img src="http://openweathermap.org/img/w/<%= weatherData.icon %>.png" alt="Weather Icon"></p>
+          <p>Coordinates: <%= weatherData.coordinates.latitude %>, <%= weatherData.coordinates.longitude %></p>
+          <p>Feels Like: <%= weatherData.feelsLike %> °C</p>
+          <p>Humidity: <%= weatherData.humidity %> %</p>
+          <p>Pressure: <%= weatherData.pressure %> hPa</p>
+          <p>Wind Speed: <%= weatherData.windSpeed %> m/s</p>
+          <p>Country Code: <%= weatherData.country %></p>
+          <p>Rain Volume Last 3 Hours: <%= weatherData.rainVolumeLast3Hours %> mm</p>
         <% } %>
 
         <% if(error !== null){ %>
