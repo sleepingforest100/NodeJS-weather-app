@@ -19,12 +19,12 @@ app.post('/', function (req, res) {
 
   request(url, function (err, response, body) {
     if (err) {
-      res.render('index', { weatherData: null, error: 'Error, please try again' });
+      res.render('index', { weatherData: null, city: null, error: 'Error, please try again' });
     } else {
       let weatherData = JSON.parse(body);
 
       if (weatherData.main == undefined) {
-        res.render('index', { weatherData: null, error: 'Error, please try again' });
+        res.render('index', { weatherData: null, city: null, error: 'Error, please try again' });
       } else {
         let weatherInfo = {
           temperature: weatherData.main.temp,
@@ -42,7 +42,7 @@ app.post('/', function (req, res) {
           rainVolumeLast3Hours: weatherData.rain ? weatherData.rain['3h'] : 0
         };
 
-        res.render('index', { weatherData: weatherInfo, error: null });
+        res.render('index', { weatherData: weatherInfo, city: city, error: null });
       }
     }
   });
