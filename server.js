@@ -1,53 +1,46 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const request = require('request');
-const api_key = '5164c9e922e9a48929e05e633713f7ff';
+const express = require("express")
+const axios = require("axios")
+require("dotenv").config()
 
-const app = express();
+const app = express()
 
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
+app.use(express.static("./public"))
+const api_key = '5164c9e922e9a48929e05e633713f7ff'
 
-app.get('/', function (req, res) {
-  res.render('index', { weatherData: null, error: null });
-});
+app.use(express.json())
 
-app.post('/', function (req, res) {
-  let city = req.body.city;
-  let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${api_key}`;
+app.get("/api/v1/weather/:city", (req, res) => {
+  //   res.send(req.params.city)
+  try {
+    const city = req.params.city
+    axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`,
+      )
+      .then((response) => {
+        const weatherData = response.data
+        res.status(200).json({
+          status: 200,
+          error: false,
+          data: weatherData,
+        })
+      })
+      .catch((err) => {
+        res.status(404).json({
+          status: 404,
+          error: true,
+          message: err.message,
+        })
+      })
+  } catch (err) {
+    res.status(400).json({
+      status: 400,
+      error: true,
+      message: err,
+    })
+  }
+})
 
-  request(url, function (err, response, body) {
-    if (err) {
-      res.render('index', { weatherData: null, city: null, error: 'Error, please try again' });
-    } else {
-      let weatherData = JSON.parse(body);
+const port = process.env.PORT || 3000
 
-      if (weatherData.main == undefined) {
-        res.render('index', { weatherData: null, city: null, error: 'Error, please try again' });
-      } else {
-        let weatherInfo = {
-          temperature: weatherData.main.temp,
-          description: weatherData.weather[0].description,
-          icon: weatherData.weather[0].icon,
-          coordinates: {
-            latitude: weatherData.coord.lat,
-            longitude: weatherData.coord.lon
-          },
-          feelsLike: weatherData.main.feels_like,
-          humidity: weatherData.main.humidity,
-          pressure: weatherData.main.pressure,
-          windSpeed: weatherData.wind.speed,
-          country: weatherData.sys.country,
-          rainVolumeLast3Hours: weatherData.rain ? weatherData.rain['3h'] : 0
-        };
-
-        res.render('index', { weatherData: weatherInfo, city: city, error: null });
-      }
-    }
-  });
-});
-
-app.listen(3000, function () {
-  console.log('Weather app listening on port 3000!');
-});
+app.listen(port, () => console.log(`Server is running on ${port}`))
