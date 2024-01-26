@@ -86,21 +86,20 @@ const renderCard = (data) => {
   // Clear the input and render the template
   city.value = "";
   renderDetails.innerHTML = template;
+
+  // Create a map
+  const map = L.map("map").setView([coord.lat, coord.lon], 13);
+
+  // Add a tile layer
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  // Add a marker for the city
+  L.marker([coord.lat, coord.lon]).addTo(map)
+    .bindPopup(`<b>${name}</b><br>${coord.lat}, ${coord.lon}</br>`)
+    .openPopup();
 };
-
-// Create a map
-const map = L.map("map").setView([0, 0], 2);
-
-// Add a tile layer
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-
-// Add a marker for the city
-L.marker([coord.lat, coord.lon]).addTo(map)
-  .bindPopup(`<b>${name}</b><br>${coord.lat}, ${coord.lon}</br>`)
-  .openPopup();
-
 
 // Function to display an error message
 const showError = (err) => {
