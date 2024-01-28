@@ -67,6 +67,28 @@ app.get('/apod', async (req, res) => {
   }
 });
 
+//Endpoint for news API
+app.get('/news', async (req, res) => {
+  try {
+    const newsResponse = await axios.get('https://newsapi.org/v2/top-headlines', {
+      params: {
+        sources: 'techcrunch',
+        apiKey: 'ebfa7c310b41464783d2ce9116ab9f80',
+      },
+    });
+
+    const newsData = newsResponse.data;
+
+    if (newsData && newsData.articles && newsData.articles.length > 0) {
+      res.json(newsData.articles);
+    } else {
+      res.status(404).json({ error: 'No news articles found.' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 // Define the port to run the server on
 const port = process.env.PORT || 3000;
 
