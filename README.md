@@ -16,14 +16,14 @@ Make sure you have the following installed:
 3. Install dependencies
 
 ## Usage
-Set up your environment variables:
-OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
-NASA_API_KEY=your_nasa_api_key
-NEWS_API_KEY=your_news_api_key
+Set up your environment variables:  
+OPENWEATHERMAP_API_KEY=your_openweathermap_api_key  
+NASA_API_KEY=your_nasa_api_key  
+NEWS_API_KEY=your_news_api_key  
 
 # Start the server:
-npm start
-The server will be running at http://localhost:3000 by default.
+npm start  
+The server will be running at http://localhost:3000 by default.  
 
 # APIs Used:
 - OpenWeatherMap API for weather data
