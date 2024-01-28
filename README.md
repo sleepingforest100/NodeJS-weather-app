@@ -1,4 +1,4 @@
-# News and Weather App
+# Weather App
 
 This is a simple Express.js web application that provides weather information, NASA APOD data, and news articles.
 
