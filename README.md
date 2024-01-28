@@ -31,8 +31,8 @@ The server will be running at http://localhost:3000 by default.
 - NewsAPI for news articles
 
 # Endpoints
-/api/v1/weather/:city - Get weather data for a specific city.
-/apod - Get NASA APOD (Astronomy Picture of the Day) data.
-/news - Get top news articles.
+/api/v1/weather/:city - Get weather data for a specific city.  
+/apod - Get NASA APOD (Astronomy Picture of the Day) data.  
+/news - Get top news articles.  
 
 
