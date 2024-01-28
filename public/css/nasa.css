@@ -1,0 +1,46 @@
+
+
+.apod-section {
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 30px auto;
+}
+
+.app-title {
+    color: #fff; /* Orange color */
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#apod-container {
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#apod-container h3 {
+    color: #ff5733; /* Orange color */
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+#apod-container p {
+    color: #3c91e6; /* Blue color */
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+#apod-container img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+#apod-container iframe {
+    max-width: 100%;
+    border: none;
+    margin-top: 15px;
+}

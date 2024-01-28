@@ -49,6 +49,24 @@ app.get("/api/v1/weather/:city", (req, res) => {
   }
 });
 
+
+
+// Endpoint for fetching NASA APOD data
+app.get('/apod', async (req, res) => {
+  try {
+      const apodResponse = await axios.get('https://api.nasa.gov/planetary/apod', {
+          params: {
+              api_key: 'JfjyJk2vHF2VP9Pgz5cxmqm5VV1LWbplg9InACWy',
+          },
+      });
+      const apodData = apodResponse.data;
+      res.json(apodData);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // Define the port to run the server on
 const port = process.env.PORT || 3000;
 
